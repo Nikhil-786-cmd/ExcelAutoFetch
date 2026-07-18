@@ -1,0 +1,24 @@
+import pandas as pd
+import requests
+import io
+
+url = "https://en.wikipedia.org/wiki/Premier_League_records_and_statistics"
+
+# Define a custom User-Agent header to mimic a web browser
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+}
+
+# Fetch the page content using requests with the custom header
+response = requests.get(url, headers=headers)
+
+# Read the HTML tables from the fetched content, wrapping the text in io.StringIO
+tables = pd.read_html(io.StringIO(response.text))
+
+# Display the tables (or the first one, for example)
+print(tables)
+
+for i, table in enumerate(url):
+  print('-------')
+  print(i)
+  print(table)
